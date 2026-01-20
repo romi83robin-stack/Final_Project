@@ -45,8 +45,9 @@ const AdminPage = () => {
     const editId = searchParams.get("edit");
     if (editId) {
       // Fetch product for editing
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
       axios
-        .get(`http://localhost:3000/api/products/${editId}`)
+        .get(`${API_URL}/products/${editId}`)
         .then((res) => {
           setEditProduct(res.data);
         })
@@ -61,7 +62,8 @@ const AdminPage = () => {
 
   const addProduct = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3000/api/products", data);
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const response = await axios.post(`${API_URL}/products`, data);
       console.log("Product added:", response.data);
       setEditProduct(null);
       alert("Product added successfully!");
@@ -73,7 +75,8 @@ const AdminPage = () => {
 
   const updateProduct = async (id, data) => {
     try {
-      const response = await axios.put(`http://localhost:3000/api/products/${id}`, data);
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const response = await axios.put(`${API_URL}/products/${id}`, data);
       console.log("Product updated:", response.data);
       alert("Product updated successfully!");
       setEditProduct(null);

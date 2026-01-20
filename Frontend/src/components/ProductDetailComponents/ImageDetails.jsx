@@ -26,8 +26,9 @@ const ImageDetails = ({ product, navigate }) => {
     }
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
       await axios.post(
-        "http://localhost:3000/api/cart",
+        `${API_URL}/cart`,
         {
           product: product._id,
           size: size || "", // Send empty string if no size selected (for SHAWLS, DUPATTAS, etc.)

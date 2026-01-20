@@ -35,7 +35,8 @@ const Product = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/products");
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const res = await axios.get(`${API_URL}/products`);
       setProducts(res.data);
     } catch (error) {
       console.error("Fetch error:", error);
@@ -129,8 +130,9 @@ const Product = () => {
               onDelete={async (id) => {
                 if (window.confirm("Are you sure you want to delete this product?")) {
                   try {
+                    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
                     await axios.delete(
-                      `http://localhost:3000/api/products/${id}`
+                      `${API_URL}/products/${id}`
                     );
                     await getProducts();
                     alert("Product deleted successfully");

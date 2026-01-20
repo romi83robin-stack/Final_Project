@@ -12,3 +12,4 @@ uploads/
 *.swp
 *.swo
 .next/
+.vercel

@@ -9,11 +9,13 @@ const CartPage = () => {
   const [cart, setCart] = useState([]);
   const navigate = useNavigate(); // ✅ Added this
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+
   useEffect(() => {
     const fetchCart = async () => {
       if (!token) return;
       try {
-        const res = await axios.get("http://localhost:3000/api/cart", {
+        const res = await axios.get(`${API_URL}/cart`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCart(res.data || []);
@@ -22,11 +24,12 @@ const CartPage = () => {
       }
     };
     fetchCart();
-  }, [token]);
+  }, [token, API_URL]);
 
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/cart/${id}`, {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      await axios.delete(`${API_URL}/cart/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCart((prev) => prev.filter((item) => item._id !== id));

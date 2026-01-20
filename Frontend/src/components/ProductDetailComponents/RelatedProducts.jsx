@@ -15,7 +15,8 @@ const RelatedProducts = ({ mainCategory, currentProductId }) => {
   useEffect(() => {
     const fetchRelated = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/products");
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+        const res = await axios.get(`${API_URL}/products`);
 
         const filtered = res.data
           .filter(
@@ -41,8 +42,9 @@ const RelatedProducts = ({ mainCategory, currentProductId }) => {
     if (favourites.includes(productId)) return;
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
       await axios.post(
-        "http://localhost:3000/api/favourites",
+        `${API_URL}/favourites`,
         { productId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

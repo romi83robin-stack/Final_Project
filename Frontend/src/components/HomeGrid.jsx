@@ -15,7 +15,8 @@ const HomeGrid = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/products", {
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+        const res = await axios.get(`${API_URL}/products`, {
           timeout: 5000 // 5 second timeout
         });
         setProducts(res.data);

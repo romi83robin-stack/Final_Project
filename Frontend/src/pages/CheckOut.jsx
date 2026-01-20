@@ -15,7 +15,8 @@ const Checkout = () => {
     const fetchCart = async () => {
       if (!token) return;
       try {
-        const res = await axios.get("http://localhost:3000/api/cart", {
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+        const res = await axios.get(`${API_URL}/cart`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setCart(res.data || []);

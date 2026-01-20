@@ -6,7 +6,8 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/register", userData);
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const res = await axios.post(`${API_URL}/auth/register`, userData);
       localStorage.setItem("token", res.data.token);
       return res.data; // { success, user, token }
     } catch (err) {
@@ -20,7 +21,8 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", { email, password });
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
       localStorage.setItem("token", res.data.token);
       return res.data;
     } catch (err) {
@@ -38,7 +40,8 @@ export const getProfile = createAsyncThunk(
       if (!token) {
         return rejectWithValue("No token found");
       }
-      const res = await axios.get("http://localhost:3000/api/auth/profile", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const res = await axios.get(`${API_URL}/auth/profile`, {
         headers: { Authorization: `Bearer ${token}` },
         timeout: 5000 // 5 second timeout
       });
