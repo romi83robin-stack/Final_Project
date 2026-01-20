@@ -12,7 +12,8 @@ const FavouritePage = () => {
   const fetchFavourites = async () => {
     try {
       if (!token) return;
-      const res = await axios.get("http://localhost:3000/api/favourites", {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      const res = await axios.get(`${API_URL}/favourites`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -28,7 +29,8 @@ const FavouritePage = () => {
     try {
       if (!token) return;
 
-      await axios.delete(`http://localhost:3000/api/favourites/${productId}`, {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+      await axios.delete(`${API_URL}/favourites/${productId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

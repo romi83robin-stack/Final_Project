@@ -21,8 +21,9 @@ const ProductList = ({ products = [], isAdmin, gridLayout = 2, onEdit, onDelete 
     if (favourites.includes(productId)) return;
 
     try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
       await axios.post(
-        "http://localhost:3000/api/favourites",
+        `${API_URL}/favourites`,
         { productId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -83,7 +83,8 @@ const DetailPage = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/products/${id}`);
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+        const res = await axios.get(`${API_URL}/products/${id}`);
         setProduct(res.data);
 
         if (res.data.images?.length > 0) {

@@ -37,8 +37,9 @@ const Checkout = () => {
   const handleCheckout = async () => {
     try {
       // ✅ Just call backend checkout endpoint
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
       const res = await axios.post(
-        "http://localhost:3000/api/order/checkout",
+        `${API_URL}/order/checkout`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
